@@ -10,52 +10,7 @@ import styles from './VideoList.less';
 const FormItem = Form.Item;
 const { Option } = Select;
 const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
-const columns = [
 
-  {
-    title: '头像',
-    dataIndex: 'avatar',
-    render: (record) => (
-      <img className={styles.listAvatar} src={record} />
-    )
-  },  
-  {
-    title: '发布人',
-    dataIndex: 'owner',
-  },  
-  {
-    title: '账户类型',
-    dataIndex: 'videoType',
-  },
-  {
-    title: '视频ID',
-    dataIndex: 'no',
-  },
-
-  {
-    title: '标题',
-    dataIndex: 'title',
-  },
-  {
-    title: '发布时间',
-    dataIndex: 'updatedAt',
-  },
-  {
-    title: '点赞数',
-    dataIndex: 'praiseNum',
-  },
-  {
-    title: '分享数',
-    dataIndex: 'shareNum',
-  },
-  {
-    title: '置顶',
-    dataIndex: 'Top',
-    render: (record) => (
-      <Icon className={styles.topIcon} type={record ? 'star' : 'star-o'} />
-    )
-  },
-];
 
 @connect(({ rule, loading }) => ({
   rule,
@@ -77,6 +32,8 @@ export default class VideoList extends PureComponent {
       type: 'rule/fetch',
     });
   }
+
+
 
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
     const { dispatch } = this.props;
@@ -107,10 +64,7 @@ export default class VideoList extends PureComponent {
   handleMenuClick = (e) => {
     const { dispatch } = this.props;
     const { selectedRows } = this.state;
-    console.log(e.key)
-
     if (!selectedRows) return;
-
     switch (e.key) {
       case 'remove':
         dispatch({
@@ -146,6 +100,52 @@ export default class VideoList extends PureComponent {
         <Menu.Item key="approval">批量审批</Menu.Item>
       </Menu>
     );
+
+    const columns = [
+      {
+        title: '头像',
+        dataIndex: 'avatar',
+        render: (record) => (
+          <img className={styles.listAvatar} src={record} key="top"/>
+        )
+      },  
+      {
+        title: '发布人',
+        dataIndex: 'owner',
+      },  
+      {
+        title: '账户类型',
+        dataIndex: 'videoType',
+      },
+      {
+        title: '视频ID',
+        dataIndex: 'no',
+      },
+    
+      {
+        title: '标题',
+        dataIndex: 'title',
+      },
+      {
+        title: '发布时间',
+        dataIndex: 'updatedAt',
+      },
+      {
+        title: '点赞数',
+        dataIndex: 'praiseNum',
+      },
+      {
+        title: '分享数',
+        dataIndex: 'shareNum',
+      },
+      {
+        title: '置顶',
+        dataIndex: 'Top',
+        render: (record) => (
+          <Icon className={record ? styles.startTopIcon : styles.startIcon} type={record ? 'star' : 'star-o'} />
+        )
+      },
+    ];
 
     return (
       <PageHeaderLayout title="视频动态">

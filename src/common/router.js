@@ -108,6 +108,11 @@ export const getRouterData = (app) => {
     '/list/video-list': {
       component: dynamicWrapper(app, ['rule'], () => import('../routes/List/VideoList')),
     },
+    // 活动动态列表
+    '/list/activity-list': {
+      component: dynamicWrapper(app, ['rule'], () => import('../routes/List/ActivityList')),
+    },
+
     '/list/table-list': {
       component: dynamicWrapper(app, ['rule'], () => import('../routes/List/TableList')),
     },

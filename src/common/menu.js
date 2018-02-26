@@ -38,6 +38,9 @@ const menuData = [{
     name: '视频动态',
     path: 'video-list',
   }, {
+    name: '活动动态',
+    path: 'activity-list',
+  }, {
     name: '基础列表',
     path: 'table-list',
   }, {

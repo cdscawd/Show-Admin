@@ -16,7 +16,7 @@ for (let i = 0; i < 46; i += 1) {
     praiseNum: Math.floor(Math.random() * 1000),
     commitNum: Math.floor(Math.random() * 1000),
     shareNum: Math.floor(Math.random() * 1000),
-    Top: false,
+    Top: ((i % 3) === 0),
     description: '这是一段描述',
     callNo: Math.floor(Math.random() * 1000),
     status: Math.floor(Math.random() * 10) % 4,
