@@ -24,6 +24,9 @@ const columns = [
   {
     title: '头像',
     dataIndex: 'avatar',
+    render: (record) => (
+      <img src={record}/>
+    )
   },
   {
     title: '账户类型',
