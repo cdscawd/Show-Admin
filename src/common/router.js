@@ -103,7 +103,6 @@ export const getRouterData = (app) => {
     '/form/advanced-form': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/AdvancedForm')),
     },
-    
     // 视频动态列表
     '/list/video-list': {
       component: dynamicWrapper(app, ['rule'], () => import('../routes/List/VideoList')),
