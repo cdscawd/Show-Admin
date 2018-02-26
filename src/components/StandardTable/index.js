@@ -95,7 +95,7 @@ class StandardTable extends PureComponent {
                     )
                   )
                 }
-                <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>清空</a>
+                <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>取消</a>
               </Fragment>
             )}
             type="info"
