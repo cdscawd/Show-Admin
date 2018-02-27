@@ -70,10 +70,14 @@ export async function queryFakeList(params) {
   return request(`/api/fake_list?${stringify(params)}`);
 }
 
+// 登陆接口 获取JWT Token
 export async function fakeAccountLogin(params) {
-  return request('/api/login/account', {
+  return request('/login', {
     method: 'POST',
-    body: params,
+    body: {
+      username: params.username,
+      password: params.password, 
+    },
   });
 }
 

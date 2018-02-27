@@ -19,6 +19,7 @@ export default class LoginPage extends Component {
 
   handleSubmit = (err, values) => {
     const { type } = this.state;
+    // let value = JSON.stringify(values);
     if (!err) {
       this.props.dispatch({
         type: 'login/login',
@@ -58,7 +59,7 @@ export default class LoginPage extends Component {
               !login.submitting &&
               this.renderMessage('账户或密码错误，请联系你的管理员')
             }
-            <UserName name="userName" placeholder="请输入大声说英语账号" /> {/*admin/use*/}
+            <UserName name="username" placeholder="请输入大声说英语账号" /> {/*admin/use*/}
             <Password name="password" placeholder="请输入密码" /> {/*888888/123456*/}
           </Tab>
           <div>

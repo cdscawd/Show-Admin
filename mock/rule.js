@@ -11,7 +11,7 @@ for (let i = 0; i < 46; i += 1) {
     avatar: ['https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png', 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png'][i % 2],
     no: `Test ${i}`,
     title: `一个任务名称 ${i}`,
-    owner:`Gatsby`,
+    owner: `Gatsby ${i}`,
     videoType: '学生',
     praiseNum: Math.floor(Math.random() * 1000),
     commitNum: Math.floor(Math.random() * 1000),

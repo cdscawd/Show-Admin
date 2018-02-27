@@ -8,10 +8,11 @@ const map = {
     props: {
       size: 'large',
       prefix: <Icon type="user" className={styles.prefixIcon} />,
-      placeholder: 'admin',
+      type: 'username',
+      // placeholder: 'admin',
     },
     rules: [{
-      required: true, message: '请输入账户名！',
+      required: true, message: '请输入大声说英语账号！',
     }],
   },
   Password: {
@@ -20,7 +21,7 @@ const map = {
       size: 'large',
       prefix: <Icon type="lock" className={styles.prefixIcon} />,
       type: 'password',
-      placeholder: '888888',
+      // placeholder: '888888',
     },
     rules: [{
       required: true, message: '请输入密码！',

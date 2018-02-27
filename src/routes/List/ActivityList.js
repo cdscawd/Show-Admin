@@ -138,19 +138,22 @@ export default class ActivityList extends PureComponent {
       },
       {
         title: '评论数',
-        dataIndex: 'shareNum',
+        dataIndex: 'commitNum',
       },
       {
         title: '参与数',
-        dataIndex: 'shareNum',
+        dataIndex: '',
       },
       {
         title: '状态',
-        dataIndex: 'shareNum',
+        dataIndex: '',
       },
       {
         title: '编辑',
-        dataIndex: 'shareNum',
+        dataIndex: '',
+        render: (record) => (
+          <a>编辑</a>
+        )
       },
     ];
 

@@ -12,6 +12,31 @@ const noProxy = process.env.NO_PROXY === 'true';
 
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 const proxy = {
+  'POST /login': (req, res) => {
+    const { password, userName, type } = req.body;
+    if(password === '888888' && userName === 'admin'){
+      res.send({
+        status: 'ok',
+        type,
+        currentAuthority: 'admin'
+      });
+      return ;
+    }
+    if(password === '123456' && userName === 'user'){
+      res.send({
+        status: 'ok',
+        type,
+        currentAuthority: 'user'
+      });
+      return ;
+    }
+    res.send({
+      status: 'error',
+      type,
+      currentAuthority: 'guest'
+    });
+  },
+
   // 支持值为 Object 和 Array
   'GET /api/currentUser': {
     $desc: "获取当前用户接口",
@@ -67,42 +92,11 @@ const proxy = {
   'GET /api/fake_chart_data': getFakeChartData,
   'GET /api/profile/basic': getProfileBasicData,
   'GET /api/profile/advanced': getProfileAdvancedData,
-
-  'POST /api/login/account': (req, res) => {
-    const { password, userName, type } = req.body;
-    // if(password === '888888' && userName === 'admin'){
-    //   res.send({
-    //     status: 'ok',
-    //     type,
-    //     currentAuthority: 'admin'
-    //   });
-    //   return ;
-    // }
-    // if(password === '123456' && userName === 'user'){
-    //   res.send({
-    //     status: 'ok',
-    //     type,
-    //     currentAuthority: 'user'
-    //   });
-    //   return ;
-    // }
-    res.send({
-      status: 'error',
-      type,
-      currentAuthority: 'guest'
-    });
-  },
-
   
   'POST /api/register': (req, res) => {
     res.send({ status: 'ok', currentAuthority: 'user' });
   },
   'GET /api/notices': getNotices,
-
-
-
-
-
 
   'GET /api/500': (req, res) => {
     res.status(500).send({
@@ -141,5 +135,6 @@ const proxy = {
     });
   },
 };
+console.log(noProxy)
+export default true ? {'GET /*': 'https://open.api.qooco.com/weixin-app-api/wxshowbb/', 'POST /*': 'https://open.api.qooco.com/weixin-app-api/wxshowbb/' } : delay(proxy, 1000);
 
-export default noProxy ? {} : delay(proxy, 1000);
