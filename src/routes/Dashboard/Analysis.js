@@ -53,64 +53,7 @@ export default class Analysis extends Component {
     rangePickerValue: getTimeDistance('year'),
   };
 
-  componentDidMount() {
-    this.props.dispatch({
-      type: 'chart/fetch',
-    });
-  }
-
-  componentWillUnmount() {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'chart/clear',
-    });
-  }
-
-  handleChangeSalesType = (e) => {
-    this.setState({
-      salesType: e.target.value,
-    });
-  };
-
-  handleTabChange = (key) => {
-    this.setState({
-      currentTabKey: key,
-    });
-  };
-
-  handleRangePickerChange = (rangePickerValue) => {
-    this.setState({
-      rangePickerValue,
-    });
-
-    this.props.dispatch({
-      type: 'chart/fetchSalesData',
-    });
-  };
-
-  selectDate = (type) => {
-    this.setState({
-      rangePickerValue: getTimeDistance(type),
-    });
-
-    this.props.dispatch({
-      type: 'chart/fetchSalesData',
-    });
-  };
-
-  isActive(type) {
-    const { rangePickerValue } = this.state;
-    const value = getTimeDistance(type);
-    if (!rangePickerValue[0] || !rangePickerValue[1]) {
-      return;
-    }
-    if (
-      rangePickerValue[0].isSame(value[0], 'day') &&
-      rangePickerValue[1].isSame(value[1], 'day')
-    ) {
-      return styles.currentDate;
-    }
-  }
+ 
 
   render() {
     const { rangePickerValue, salesType, currentTabKey } = this.state;

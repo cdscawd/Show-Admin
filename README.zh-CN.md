@@ -88,3 +88,11 @@ $ pro new
 - 在你的公司或个人项目中使用 Ant Design Pro。
 - 通过 [Issue](http://github.com/ant-design/ant-design-pro/issues) 报告 bug 或进行咨询。
 - 提交 [Pull Request](http://github.com/ant-design/ant-design-pro/pulls) 改进 Pro 的代码。
+
+
+
+
+
+
+
+提示： 目前登陆页面的逻辑处理完成，现在的问题是涉及到登陆成功之后的跳转问题，权限控制等，需要再继续梳理。

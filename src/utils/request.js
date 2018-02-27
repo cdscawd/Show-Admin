@@ -2,6 +2,7 @@ import fetch from 'dva/fetch';
 import { notification } from 'antd';
 import { routerRedux } from 'dva/router';
 import store from '../index';
+import base64 from 'base-64';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -68,6 +69,15 @@ export default function request(url, options) {
   return fetch(url, newOptions)
     .then(checkStatus)
     .then((response) => {
+      // response.headers.forEach((v, k) => console.log(k, v));
+      if (response.headers.get('authorization')) {
+        let accountToken = JSON.parse(base64.decode((response.headers.get('authorization')).split('.')[1]));
+        console.log(accountToken);
+      } else {
+        // alert('登陆失败')
+      }
+
+
       if (newOptions.method === 'DELETE' || response.status === 204) {
         return response.text();
       }
