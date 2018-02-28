@@ -26,13 +26,17 @@ export default class VideoList extends PureComponent {
     formValues: {},
   };
 
+  // 初次加载 加载第一页
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
+    const params = 1
     dispatch({
       type: 'rule/fetch',
+      params: params
     });
   }
 
+  // 分页查询点击事件
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
     const { dispatch } = this.props;
     const { formValues } = this.state;
@@ -102,24 +106,23 @@ export default class VideoList extends PureComponent {
     const columns = [
       {
         title: '头像',
-        dataIndex: 'avatar',
+        dataIndex: 'vid',
         render: (record) => (
           <img className={styles.listAvatar} src={record} key="top"/>
         )
       },  
       {
         title: '发布人',
-        dataIndex: 'owner',
+        dataIndex: 'id',
       },  
       {
         title: '账户类型',
-        dataIndex: 'videoType',
+        dataIndex: 'uploadTime',
       },
       {
         title: '视频ID',
-        dataIndex: 'no',
+        dataIndex: 'commentCount',
       },
-    
       {
         title: '标题',
         dataIndex: 'title',

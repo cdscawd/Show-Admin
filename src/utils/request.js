@@ -48,7 +48,6 @@ export default function request(url, options) {
     credentials: 'include',
   };
   const newOptions = { ...defaultOptions, ...options };
-  alert(newOptions.method)
   
   if (newOptions.method === 'GET') {
     let accountToken = localStorage.getItem('account_type');

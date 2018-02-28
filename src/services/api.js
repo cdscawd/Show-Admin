@@ -81,7 +81,8 @@ export async function fakeAccountLogin(params) {
 
 // 获取视频列表数据
 export async function queryRule(params) {
-  return request(`/video-manage/query-all/${1}`, { 
+  params = params || 1
+  return request(`/video-manage/query-all/${params}`, { 
     method: 'GET',
   });
 }
