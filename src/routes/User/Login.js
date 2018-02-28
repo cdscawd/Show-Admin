@@ -30,7 +30,6 @@ export default class LoginPage extends Component {
 
   render() {
     const { login, submitting } = this.props;
-    console.log(login.status)
     return (
       <div className={styles.main}>
         <Login

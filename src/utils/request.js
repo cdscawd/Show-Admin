@@ -48,6 +48,17 @@ export default function request(url, options) {
     credentials: 'include',
   };
   const newOptions = { ...defaultOptions, ...options };
+  alert(newOptions.method)
+  
+  if (newOptions.method === 'GET') {
+    let accountToken = localStorage.getItem('account_type');
+    newOptions.headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
+      authorization: accountToken,
+      ...newOptions.headers,
+    };
+  }
   if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
     if (!(newOptions.body instanceof FormData)) {
       newOptions.headers = {
@@ -71,8 +82,10 @@ export default function request(url, options) {
     .then((response) => {
       // response.headers.forEach((v, k) => console.log(k, v));
       if (response.headers.get('authorization')) {
-        let accountToken = JSON.parse(base64.decode((response.headers.get('authorization')).split('.')[1]));
-        console.log(accountToken);
+        // let accountToken = JSON.parse(base64.decode((response.headers.get('authorization')).split('.')[1]));
+        let accountToken = response.headers.get('authorization');
+        localStorage.setItem('account_type', accountToken);
+        console.log(`accountToken: ${accountToken}`);
       } else {
         // alert('登陆失败')
       }

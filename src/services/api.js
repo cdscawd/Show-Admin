@@ -9,9 +9,7 @@ export async function queryActivities() {
   return request('/api/activities');
 }
 
-export async function queryRule(params) {
-  return request(`/api/rule?${stringify(params)}`);
-}
+
 
 export async function removeRule(params) {
   return request('/api/rule', {
@@ -76,8 +74,15 @@ export async function fakeAccountLogin(params) {
     method: 'POST',
     body: {
       username: params.username,
-      password: params.password, 
+      password: params.password,
     },
+  });
+}
+
+// 获取视频列表数据
+export async function queryRule(params) {
+  return request(`/video-manage/query-all/${1}`, { 
+    method: 'GET',
   });
 }
 

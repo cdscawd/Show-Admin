@@ -18,8 +18,8 @@ export default {
         payload: response,
       });
       // Login successfully
-      console.log(response)
       if (response.message === 'SUCCESS') {
+        localStorage.setItem('authority', 'admin')
         reloadAuthorized();
         yield put(routerRedux.push('/'));
       }
@@ -48,8 +48,7 @@ export default {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      console.log(payload.message)
-      setAuthority(payload.currentAuthority || 'admin');
+      // setAuthority(payload.currentAuthority || 'admin');
       return {
         ...state,
         status: payload.status,
