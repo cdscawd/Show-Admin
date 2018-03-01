@@ -1,0 +1,6 @@
+{
+  "name": "SpaceState",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./SpaceState.js"
+}

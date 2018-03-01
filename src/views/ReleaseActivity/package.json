@@ -1,0 +1,6 @@
+{
+  "name": "ReleaseActivity",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ReleaseActivity.js"
+}

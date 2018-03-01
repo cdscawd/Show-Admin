@@ -1,0 +1,37 @@
+// Here you can add other styles
+
+.navbar-nav {
+  margin-right: 30px;
+}
+.table-list {
+  th {
+    word-break: keep-all;
+    text-align: center;
+    &:nth-child(5) {
+      width: 30%;
+    }
+  }
+  td {
+    word-break: keep-all;
+    text-align: center;
+    padding: 4px 6px!important;
+    min-height: 28px;
+    line-height: 28px;
+    &:first-child, &:nth-child(10), &:last-child {
+      cursor: pointer;
+    }
+  }
+}
+.video-avatar {
+  height: 28px;
+  margin: 0 10px;
+}
+.fa-star-o {
+  &:hover {
+    color: red;
+  }
+}
+.fa-star {
+  color: red;
+}
+
