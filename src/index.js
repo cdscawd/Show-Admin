@@ -11,6 +11,9 @@ import 'simple-line-icons/css/simple-line-icons.css';
 // Import Main styles for this application
 import '../scss/style.scss'
 
+import 'antd/dist/antd.min.css';
+
+
 // Containers
 import Full from './containers/Full/'
 

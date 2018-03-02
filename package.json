@@ -32,7 +32,9 @@
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "antd": "^3.2.2",
     "axios": "^0.18.0",
+    "babel-plugin-import": "^1.6.5",
     "bootstrap": "^4.0.0-beta",
     "chart.js": "2.6.0",
     "font-awesome": "^4.7.0",
