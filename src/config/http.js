@@ -3,6 +3,7 @@ import qs from 'qs'
 axios.defaults.timeout = 5000;
 // axios.defaults.headers.post['Accept'] = 'application/json';
 axios.defaults.headers.get['Authorization'] = localStorage.getItem('authorization');
+axios.defaults.headers.post['Authorization'] = localStorage.getItem('authorization');
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.baseURL = 'https://open.api.qooco.com/weixin-app-api/wxshowbb';
 

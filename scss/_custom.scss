@@ -14,7 +14,7 @@
   td {
     word-break: keep-all;
     text-align: center;
-    padding: 4px 6px!important;
+    padding: 8px 6px!important;
     min-height: 28px;
     line-height: 28px;
     &:first-child, &:nth-child(10), &:last-child {
@@ -26,12 +26,22 @@
   height: 28px;
   margin: 0 10px;
 }
-.fa-star-o {
+.fa-star-o, 
+tr td:last-child {
   &:hover {
     color: red;
   }
 }
 .fa-star {
   color: red;
+}
+
+.ant-message {
+  z-index: 1040;
+}
+table {
+  .ant-checkbox-wrapper {
+    margin-right: 12px;
+  }
 }
 

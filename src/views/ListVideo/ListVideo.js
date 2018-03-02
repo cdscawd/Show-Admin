@@ -8,9 +8,14 @@ import {
   CardHeader,
   CardBlock,
   Table,
+  Button,
+
 } from "reactstrap";
-import { Pagination, Avatar, Modal, Button } from 'antd';
+import { Pagination, Avatar, Modal, message, Checkbox } from 'antd';
 const confirm = Modal.confirm;
+message.config({
+  duration: 1.5,
+});
 
 class ListVideo extends Component {
   constructor(props) {
@@ -41,7 +46,7 @@ class ListVideo extends Component {
       console.log(that.state)
     })
     .catch((error) => {
-      console.log(error);
+      message.error('网络出错，请重试');
     });
   }
 
@@ -62,23 +67,104 @@ class ListVideo extends Component {
     let videoList = this.state.videoList
     let stick = videoList[index].stick
     let nickName = videoList[index].wxUserInfo.nickName
+    let id = videoList[index].id
     console.log(stick) 
-    this.showConfirm(stick, nickName)
-
+    if (stick) {
+      // 取消置顶
+      this.topStickCancel(index, nickName, id)
+    } else {
+      // 置顶
+      this.topStickOk(index, nickName, id)
+    }
   }
 
-
-  showConfirm(stick, nickName) {
+  // 取消置顶
+  topStickCancel(index, nickName, id) {
+    let that = this
+    let videoList = this.state.videoList 
     confirm({
-      title: `请确认你是否要置顶 ${nickName} 的视频`,
-      content: `置顶发布人 ${nickName} 的视频？`,
+      title: `提示`,
+      content: `取消置顶发布人 ${nickName} 的视频？`,
+      cancelText: '取消',
+      okText: '确定',
       onOk() {
-        console.log('置顶');
-      },
-      onCancel() {
-        console.log('取消置顶');
+        axios.post(`/video-manage/unstick/${id}`)
+        .then( (res) => {
+          if (res.status == 200) {
+            videoList[index].stick = false
+            that.setState({
+              videoList: videoList
+            })
+            message.success('取消置顶成功');
+          }
+        })
+        .catch( (error) => {
+          message.error('网络出错，请重试');
+        });
       },
     });
+  }
+
+  // 置顶
+  topStickOk(index, nickName, id) {
+    let that = this
+    let videoList = this.state.videoList 
+    confirm({
+      title: `提示`,
+      content: `置顶发布人 ${nickName} 的视频？`,
+      cancelText: '取消',
+      okText: '确定',
+      onOk() {
+        axios.post(`/video-manage/stick/${id}`)
+        .then( (res) => {
+          if (res.status == 200) {
+            videoList[index].stick = true
+            that.setState({
+              videoList: videoList
+            })
+            message.success('置顶成功');
+          }
+        })
+        .catch( (error) => {
+          message.error('网络出错，请重试');
+        });
+      },
+    });
+  }
+
+  // 删除视频
+  deleteVidoe(index) {
+    let that = this
+    let videoList = this.state.videoList
+    let nickName = videoList[index].wxUserInfo.nickName
+    var params = new URLSearchParams()
+    params.append('id', videoList[index].id)
+
+    confirm({
+      title: `提示`,
+      content: `删除发布人 ${nickName} 的视频？`,
+      cancelText: '取消',
+      okText: '确定',
+      onOk() {
+        axios.post(`/video-manage/delete`, params)
+        .then( (res) => {
+          if (res.status == 200) {
+            videoList.splice(index, 1)
+            that.setState({
+              videoList: videoList
+            })
+            message.success('删除成功');
+          }
+        })
+        .catch( (error) => {
+          message.error('网络出错，请重试');
+        });
+      },
+    });
+  }
+
+  checkboxOnChange(index) {
+    console.log(index)
   }
 
   render() {
@@ -97,7 +183,10 @@ class ListVideo extends Component {
           <i className="fa fa-align-justify"></i> 视频动态
           </CardHeader>
           <CardBlock className="card-body">
-            <Table hover bordered striped responsive size="sm">
+
+            <Button outline color="secondary">批量删除</Button>
+
+            <Table hover size="sm">
               <thead>
                 <tr>
                   <th>视频</th>
@@ -118,7 +207,13 @@ class ListVideo extends Component {
                   videoList.length != 0 && videoList.map( (item, index) => {
                     return (
                       <tr key={item.id}>
-                        <td title={ `播放 ${item.wxUserInfo.nickName} 的视频` }><i className="fa fa-youtube-play fa-lg"></i></td>
+                        <td title={ `播放 ${item.wxUserInfo.nickName} 的视频` }>
+                          <Checkbox
+                            value={false}
+                            onChange={ (e) => {this.checkboxOnChange(index)} }
+                          />
+                          <i className="fa fa-youtube-play fa-lg"></i>
+                        </td>
                         <td>{item.wxUserInfo.nickName}</td>
                         <td>
                           {/* <img className="img-avatar video-avatar" src={item.wxUserInfo.avatarUrl} alt=""/> */}
@@ -130,10 +225,10 @@ class ListVideo extends Component {
                         <td>{item.thumbupCount}</td>
                         <td>{item.commentCount}</td>
                         <td>{item.shareCount || 0}</td>
-                        <td title={ `置顶 ${item.wxUserInfo.nickName} 的视频` } data-video-index={index} onClick={(e) => {this.topHandleClick(index)}}>
+                        <td title={ `置顶 ${item.wxUserInfo.nickName} 的视频` } onClick={(e) => {this.topHandleClick(index)}}>
                           <i className={`fa fa-lg ${ item.stick ? 'fa-star' : 'fa-star-o' } `}></i>
                         </td>
-                        <td title={ `删除 ${item.wxUserInfo.nickName} 的视频` } data-video-index={index}><i className="fa fa-trash-o fa-lg"></i> 删除</td>
+                        <td title={ `删除 ${item.wxUserInfo.nickName} 的视频` } onClick={(e) => {this.deleteVidoe(index)}}><i className="fa fa-trash-o fa-lg"></i> 删除</td>
                       </tr>
                     )
                   })

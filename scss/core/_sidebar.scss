@@ -3,7 +3,8 @@
   padding: $sidebar-padding;
   overflow: hidden;
   color: $sidebar-color;
-  background: $sidebar-bg;
+  background: #001529;
+  // background: $sidebar-bg;
   @include borders($sidebar-borders);
 
   .sidebar-close {
